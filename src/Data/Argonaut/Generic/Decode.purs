@@ -14,7 +14,7 @@ import Data.Array.Partial as Unsafe
 import Data.StrMap as M
 import Control.Alt ((<|>))
 import Control.Bind ((=<<))
-import Data.Argonaut.Core (fromObject, fromArray, Json, toArray, toString, toObject, toBoolean, toNumber)
+import Data.Argonaut.Core (fromObject, Json, toArray, toString, toObject, toBoolean, toNumber)
 import Data.Argonaut.Generic.Options (Options(..), SumEncoding(..), dummyUserDecoding, dummyUserEncoding)
 import Data.Array (zipWithA, length)
 import Data.Either (Either(Right, Left))
@@ -97,7 +97,7 @@ genericDecodeProdJson' opts'@(Options opts) tname constrSigns json = unsafeParti
     fixConstr      = opts.constructorTagModifier
     sumConf = case opts.sumEncoding of
       TaggedObject conf -> conf
-      _ -> unsafeCrashWith "Only TaggedObject encoding is supported - FIX ME!"
+      -- _ -> unsafeCrashWith "Only TaggedObject encoding is supported - FIX ME!"
     tagL = sumConf.tagFieldName
     contL = sumConf.contentsFieldName
     findConstrFail tag = mFail (decodingErr ("'" <> tag <> "' isn't a valid constructor")) (findConstr tag)
